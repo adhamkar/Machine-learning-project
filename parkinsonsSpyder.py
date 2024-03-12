@@ -13,31 +13,39 @@ from streamlit_option_menu import option_menu
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-
+from sklearn.ensemble import RandomForestClassifier
 
 
 #load parkinsons data
-parkinsons_model=pickle.load(open('./models/parkinsons_model.sav', 'rb'))
-parkinsons_forest=pickle.load(open('./models/parkinsons_forest.sav', 'rb'))
+parkinsons_model=pickle.load(open('C:/Users/adham/parkinsons_model.sav', 'rb'))
+parkinsons_forest=pickle.load(open('C:/Users/adham/parkinsons_forest.sav', 'rb'))
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(
     page_title="Hello",
     page_icon="👋",
 )
-data = pd.read_csv("./parkinsons.csv")    
+data = pd.read_csv("C:/Users/adham/Downloads/parkinsons.csv")   
 data.drop(["name"],axis="columns",inplace=True)
 
 x=data.drop("status",axis=1)
 y=data["status"]
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
-score = parkinsons_model.score(X_test, y_test)
+
+parkinsons_model.fit(X_train, y_train)
+model = LogisticRegression(max_iter=100000)
+model.fit(X_train, y_train)
+score = model.score(X_test, y_test)
 score=score*100
-score2 = parkinsons_forest.score(X_test, y_test)
-score2=score2*100
+
+parkinsons_forest.fit(X_train, y_train)
+model_for = RandomForestClassifier(n_estimators=10)
+model_for.fit(X_train, y_train)
+score_for = model_for.score(X_test, y_test)
+score_for=score_for*100
 
 
 # Main content
-st.title("Parkinsons Prediction !")
+st.title("Prediction de Parkinsons!")
 
 
 
@@ -45,7 +53,7 @@ def result():
     
     parkinsons_diagnosis = ''
 
-    if st.button('Parkinsons test result :'):
+    if st.button('Resultat du test :'):
         user_input=[MDVP_Fo, MDVP_Fhi, MDVP_Flo, MDVP_Jitte_ptg, MDVP_Jitter_ABS, MDVP_RAP, MDVP_PPQ, Jitter_DDP,
                       MDVP_Shimmer, MDVP_Shimmer_dB, Shimmer_APQ3, Shimmer_APQ5, MDVP_APQ, Shimmer_DDA, NHR, HNR, RPDE,
                       DFA, spread1, spread2, D2,PPE]
@@ -55,9 +63,9 @@ def result():
         parkinsons_prediction = parkinsons_model.predict([user_input])
         
         if parkinsons_prediction[0] == 1:
-                parkinsons_diagnosis = 'The person has parkinsons'
+                parkinsons_diagnosis = 'La personne a du parkinsons'
         else:
-                parkinsons_diagnosis = 'The person has not parkinsons'
+                parkinsons_diagnosis = 'La personne n a pas du parkinsons'
                 
     st.success(parkinsons_diagnosis)
 
@@ -65,7 +73,7 @@ def result():
 def result_forest():
     parkinsons_diagnosis = ''
 
-    if st.button('Parkinsons test result :'):
+    if st.button('Resultat du test :'):
         user_input=[MDVP_Fo, MDVP_Fhi, MDVP_Flo, MDVP_Jitte_ptg, MDVP_Jitter_ABS, MDVP_RAP, MDVP_PPQ, Jitter_DDP,
                       MDVP_Shimmer, MDVP_Shimmer_dB, Shimmer_APQ3, Shimmer_APQ5, MDVP_APQ, Shimmer_DDA, NHR, HNR, RPDE,
                       DFA, spread1, spread2, D2,PPE]
@@ -75,9 +83,9 @@ def result_forest():
         parkinsons_prediction = parkinsons_forest.predict([user_input])
         
         if parkinsons_prediction[0] == 1:
-                parkinsons_diagnosis = 'The person has parkinsons'
+                parkinsons_diagnosis = 'La personne a du parkinsons'
         else:
-                parkinsons_diagnosis = 'The person has not parkinsons'
+                parkinsons_diagnosis = 'La personne n a pas du parkinsons'
                 
     st.success(parkinsons_diagnosis)
 
@@ -85,10 +93,10 @@ def result_forest():
 #sidebar
 with st.sidebar:
     
-    selected=option_menu('Parkinsons diseas prediction Using ML',
+    selected=option_menu('Prediction de la maladie Parkinsons avec ML',
                          ['Home',
-                          'Predict with logistic Regression',
-                          'Predict with Random forest'
+                          'Predire avec la regression logistique',
+                          'Predire avec Random forest'
                           ],
                          menu_icon='hospital-fill',
                            icons=['home','activity', 'person'],
@@ -98,9 +106,9 @@ with st.sidebar:
 if selected == 'Home':
     selected_option = st.sidebar.selectbox(
         "Select an option",
-        ("DataSet", "Graph", "Information"),
-        index=None,
-        placeholder="Select contact method..."
+        ("DataSet", "Graphes", "Information"),
+        
+        placeholder="Selectionner une option"
     )
 
     if selected_option == "DataSet":
@@ -144,7 +152,7 @@ if selected == 'Home':
     elif selected_option == "Graph":
         st.header("Some Graphs :")
         st.write("Exemple de graphe en fonction de MDVP:Fo et MDVP:Fhi")
-        data = pd.read_csv("./parkinsons.csv")
+        data = pd.read_csv("C:/Users/adham/Downloads/parkinsons.csv")
         data.drop(["name"],axis="columns",inplace=True)
         sns.pairplot(data=data[['MDVP:Fo(Hz)', 'MDVP:Fhi(Hz)']])
         st.pyplot()
@@ -152,7 +160,7 @@ if selected == 'Home':
         st.pyplot()
         
     elif selected_option == "Information":
-        data = pd.read_csv("./parkinsons.csv")
+        data = pd.read_csv("C:/Users/adham/Downloads/parkinsons.csv")
         data.drop(["name"],axis="columns",inplace=True)
         st.header("Description du dataset")
         st.write(data.describe())
@@ -163,9 +171,9 @@ if selected == 'Home':
         
 
 
-elif(selected=='Predict with logistic Regression'):
-    st.title('Predict with logistic Regression')
-    st.write("Model Accuracy:", "{:.2f}%".format(score))
+elif(selected=='Predire avec la regression logistique'):
+    st.title('Regression logistique')
+    st.write("Précision du modèle:", "{:.2f}%".format(score))
     col1, col2, col3 = st.columns(3)
     
     with col1:
@@ -223,8 +231,8 @@ elif(selected=='Predict with logistic Regression'):
      
 
 else:
-    st.title('Predict with Random Forest')
-    st.write("Model Accuracy:", "{:.2f}%".format(score2))
+    st.title('Predire avec Random forest')
+    st.write("Précision du modèle:", "{:.2f}%".format(score_for))
     col1, col2, col3 = st.columns(3)
     
     with col1:
