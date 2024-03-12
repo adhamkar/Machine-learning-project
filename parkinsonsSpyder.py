@@ -17,24 +17,23 @@ from sklearn.linear_model import LogisticRegression
 
 
 #load parkinsons data
-parkinsons_model=pickle.load(open('C:/Users/adham/parkinsons_model.sav', 'rb'))
-parkinsons_forest=pickle.load(open('C:/Users/adham/parkinsons_forest.sav', 'rb'))
+parkinsons_model=pickle.load(open('./models/parkinsons_model.sav', 'rb'))
+parkinsons_forest=pickle.load(open('./models/parkinsons_forest.sav', 'rb'))
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(
     page_title="Hello",
     page_icon="👋",
 )
-data = pd.read_csv("C:/Users/adham/Downloads/parkinsons.csv")   
+data = pd.read_csv("./parkinsons.csv")    
 data.drop(["name"],axis="columns",inplace=True)
 
 x=data.drop("status",axis=1)
 y=data["status"]
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
-parkinsons_model.fit(X_train, y_train)
-model = LogisticRegression(max_iter=100000)
-model.fit(X_train, y_train)
-score = model.score(X_test, y_test)
+score = parkinsons_model.score(X_test, y_test)
 score=score*100
+score2 = parkinsons_forest.score(X_test, y_test)
+score2=score2*100
 
 
 # Main content
@@ -145,7 +144,7 @@ if selected == 'Home':
     elif selected_option == "Graph":
         st.header("Some Graphs :")
         st.write("Exemple de graphe en fonction de MDVP:Fo et MDVP:Fhi")
-        data = pd.read_csv("C:/Users/adham/Downloads/parkinsons.csv")
+        data = pd.read_csv("./parkinsons.csv")
         data.drop(["name"],axis="columns",inplace=True)
         sns.pairplot(data=data[['MDVP:Fo(Hz)', 'MDVP:Fhi(Hz)']])
         st.pyplot()
@@ -153,7 +152,7 @@ if selected == 'Home':
         st.pyplot()
         
     elif selected_option == "Information":
-        data = pd.read_csv("C:/Users/adham/Downloads/parkinsons.csv")
+        data = pd.read_csv("./parkinsons.csv")
         data.drop(["name"],axis="columns",inplace=True)
         st.header("Description du dataset")
         st.write(data.describe())
@@ -225,6 +224,7 @@ elif(selected=='Predict with logistic Regression'):
 
 else:
     st.title('Predict with Random Forest')
+    st.write("Model Accuracy:", "{:.2f}%".format(score2))
     col1, col2, col3 = st.columns(3)
     
     with col1:
