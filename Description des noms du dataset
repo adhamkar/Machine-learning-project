@@ -1,0 +1,25 @@
+Description des noms du dataset :
+
+MDVP:Fo(Hz) : Fréquence fondamentale moyenne en Hertz (Hz).
+MDVP:Fhi(Hz) : Fréquence maximale des harmoniques en Hertz (Hz).
+MDVP:Flo(Hz) : Fréquence minimale des harmoniques en Hertz (Hz).
+MDVP:Jitter(%) : Variabilité de la période fondamentale en pourcentage (%).
+MDVP:Jitter(Abs) : Mesure absolue de la variation de la période fondamentale.
+MDVP:RAP : Amplitude relative de la période fondamentale.
+MDVP:PPQ : Variation de la période fondamentale, perturbations, et quasipériodicité.
+Jitter:DDP : Variabilité de la période fondamentale, rapport de délai double.
+MDVP:Shimmer : Variabilité de l'amplitude de la période fondamentale.
+MDVP:Shimmer(dB) : Variabilité de l'amplitude de la période fondamentale en décibels (dB).
+Shimmer:APQ3 : Amplitude du tremblement, moyenne de la variation d'amplitude sur trois segments.
+Shimmer:APQ5 : Amplitude du tremblement, moyenne de la variation d'amplitude sur cinq segments.
+MDVP:APQ : Amplitude du tremblement, moyenne de la variation d'amplitude.
+Shimmer:DDA : Amplitude du tremblement, analyse d'aires sous la courbe.
+NHR : Rapport harmonique au bruit.
+HNR : Rapport harmonique au bruit.
+status : Statut de la maladie de Parkinson (variable cible binaire).
+RPDE : Dimension de l'espace de Reichardt-Pfeiffer.
+DFA : Analyse fractale de la fluctuation.
+spread1 : Paramètre de dispersion vocal 1.
+spread2 : Paramètre de dispersion vocal 2.
+D2 : Mesure de la complexité de la voix.
+PPE : Excursion de la période fondamentale moyenne.
