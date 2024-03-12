@@ -108,7 +108,7 @@ if selected == 'Home':
         "Select an option",
         ("DataSet", "Graphes", "Information"),
         
-        placeholder="Selectionner une option"
+        placeholder="Selectionner une option."
     )
 
     if selected_option == "DataSet":
@@ -149,7 +149,7 @@ if selected == 'Home':
     }
         df = pd.DataFrame(data)
         st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
-    elif selected_option == "Graph":
+    elif selected_option == "Graphes":
         st.header("Some Graphs :")
         st.write("Exemple de graphe en fonction de MDVP:Fo et MDVP:Fhi")
         data = pd.read_csv("C:/Users/adham/Downloads/parkinsons.csv")
