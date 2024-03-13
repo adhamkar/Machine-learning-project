@@ -16,37 +16,30 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 
-try:
-    st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
-    )
-except Exception as e:
-    st.error(f"Error setting page config: {e}")
+st.set_page_config(
+    page_title="Hello",
+    page_icon="👋",
+)
+#load parkinsons data
+parkinsons_model=pickle.load(open('C:/Users/adham/parkinsons_model.sav', 'rb'))
+parkinsons_forest=pickle.load(open('C:/Users/adham/parkinsons_forest.sav', 'rb'))
 
+# def load_model(file_name):
+#     with open(file_name, 'rb') as f:
+#         model = pickle.load(f)
+#     return model
 
-def load_model(file_name):
-    with open(file_name, 'rb') as f:
-        model = pickle.load(f)
-    return model
+# # Define function to predict using model
+# def predict(model, input_data):
+#     return model.predict(input_data)
 
-script_dir = os.path.dirname(os.path.realpath(__file__))  # Get directory of the script
-models_dir = os.path.join(script_dir, 'models')  # Path to models directory
-parkinsons_model_path = os.path.join(models_dir, 'parkinsons_model.sav')
-parkinsons_forest_path = os.path.join(models_dir, 'parkinsons_forest.sav')
-parkinsons_model = load_model(parkinsons_model_path)
-parkinsons_forest = load_model(parkinsons_forest_path)
-
-# Debugging: Output file path
-st.write("CSV File Path:", os.path.join(script_dir, "parkinsons.csv"))
-
-# Load the dataset
-data_file_path = os.path.join(script_dir, "parkinsons.csv")
-data = pd.read_csv(data_file_path)
+# # Load the models
+# current_dir = os.path.dirname(os.path.abspath(__file__))  # Get current directory
+# parkinsons_model = load_model(os.path.join(current_dir, 'parkinsons_model.sav'))
+# parkinsons_forest = load_model(os.path.join(current_dir, 'parkinsons_forest.sav'))
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-    
 data = pd.read_csv("C:/Users/adham/Downloads/parkinsons.csv")   
 data.drop(["name"],axis="columns",inplace=True)
 
@@ -310,15 +303,3 @@ else:
     with col1:
          PPE=st.text_input('PPE')
     result_forest()
-#result 
-
-
-
-
-
-
-
-
-
-
-
