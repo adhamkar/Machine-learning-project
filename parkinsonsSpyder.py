@@ -37,10 +37,14 @@ data_file_path = os.path.join(script_dir, "parkinsons.csv")
 data = pd.read_csv(data_file_path)
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-st.set_page_config(
-    page_title="Hello",
-    page_icon="👋",
-)
+try:
+    st.set_page_config(
+        page_title="Hello",
+        page_icon="👋",
+    )
+except Exception as e:
+    st.error(f"Error setting page config: {e}")
+    
 data = pd.read_csv("C:/Users/adham/Downloads/parkinsons.csv")   
 data.drop(["name"],axis="columns",inplace=True)
 
