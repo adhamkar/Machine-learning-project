@@ -17,8 +17,20 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 #load parkinsons data
-parkinsons_model=pickle.load(open('C:/Users/adham/parkinsons_model.sav', 'rb'))
-parkinsons_forest=pickle.load(open('C:/Users/adham/parkinsons_forest.sav', 'rb'))
+def load_model(file_name):
+    with open(file_name, 'rb') as f:
+        model = pickle.load(f)
+    return model
+
+# Define function to predict using model
+def predict(model, input_data):
+    return model.predict(input_data)
+
+# Load the models
+current_dir = os.path.dirname(os.path.abspath(__file__))  # Get current directory
+parkinsons_model = load_model(os.path.join(current_dir, 'parkinsons_model.sav'))
+parkinsons_forest = load_model(os.path.join(current_dir, 'parkinsons_forest.sav'))
+
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(
     page_title="Hello",
