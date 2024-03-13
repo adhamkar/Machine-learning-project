@@ -182,6 +182,10 @@ if selected == 'Home':
         st.write(data.describe())
         st.header("Les types des caracteristiques")
         st.write(data.dtypes)
+        st.header("Verifier s'il y a des valeurs nulles")
+        st.write(data.isnull().sum())
+        st.header("Verifier s'il y a des NaN")
+        st.write(data.isnull().values.any())
         st.header("Correclation")
         st.write(data.corr())
         
