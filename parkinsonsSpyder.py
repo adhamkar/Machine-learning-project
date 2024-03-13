@@ -27,8 +27,8 @@ def predict(model, input_data):
     return model.predict(input_data)
 
 # Load the models
-current_dir = os.path.dirname(os.path.abspath(__file__))  # Get current directory
-models_dir = os.path.join(current_dir, 'models')  # Path to models directory
+script_dir = os.path.dirname(os.path.realpath(__file__))  # Get directory of the script
+models_dir = os.path.join(script_dir, 'models')  # Path to models directory
 parkinsons_model_path = os.path.join(models_dir, 'parkinsons_model.sav')
 parkinsons_forest_path = os.path.join(models_dir, 'parkinsons_forest.sav')
 parkinsons_model = load_model(parkinsons_model_path)
