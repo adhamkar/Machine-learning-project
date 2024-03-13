@@ -30,6 +30,7 @@ parkinsons_forest_path = os.path.join(models_dir, 'parkinsons_forest.sav')
 parkinsons_model = load_model(parkinsons_model_path)
 parkinsons_forest = load_model(parkinsons_forest_path)
 
+# Load the dataset
 data_file_path = os.path.join(script_dir, "parkinsons.csv")
 data = pd.read_csv(data_file_path)
 
