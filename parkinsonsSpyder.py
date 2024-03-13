@@ -16,8 +16,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 
 
-parkinsons_model=pickle.load(open('C:/Users/adham/parkinsons_model.sav', 'rb'))
-parkinsons_forest=pickle.load(open('C:/Users/adham/parkinsons_forest.sav', 'rb'))
+parkinsons_model=pickle.load(open('models\parkinsons_model.sav', 'rb'))
+parkinsons_forest=pickle.load(open('models\parkinsons_forest.sav', 'rb'))
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(
