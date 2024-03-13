@@ -17,8 +17,8 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 #load parkinsons data
-parkinsons_model=pickle.load(open('C:/Users/adham/achine-learning-project/models/parkinsons_model.sav', 'rb'))
-parkinsons_forest=pickle.load(open('C:/Users/adham/achine-learning-project/models/parkinsons_forest.sav', 'rb'))
+parkinsons_model=pickle.load(open('C:/Users/adham/parkinsons_model.sav', 'rb'))
+parkinsons_forest=pickle.load(open('C:/Users/adham/parkinsons_forest.sav', 'rb'))
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(
     page_title="Hello",
