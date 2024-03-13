@@ -28,8 +28,11 @@ def predict(model, input_data):
 
 # Load the models
 current_dir = os.path.dirname(os.path.abspath(__file__))  # Get current directory
-parkinsons_model = load_model(os.path.join(current_dir, 'parkinsons_model.sav'))
-parkinsons_forest = load_model(os.path.join(current_dir, 'parkinsons_forest.sav'))
+models_dir = os.path.join(current_dir, 'models')  # Path to models directory
+parkinsons_model_path = os.path.join(models_dir, 'parkinsons_model.sav')
+parkinsons_forest_path = os.path.join(models_dir, 'parkinsons_forest.sav')
+parkinsons_model = load_model(parkinsons_model_path)
+parkinsons_forest = load_model(parkinsons_forest_path)
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(
