@@ -16,23 +16,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 
 
-#load parkinsons data
-def load_model(file_name):
-    with open(file_name, 'rb') as f:
-        model = pickle.load(f)
-    return model
-
-# Define function to predict using model
-def predict(model, input_data):
-    return model.predict(input_data)
-
-# Load the models
-script_dir = os.path.dirname(__file__)  # Get directory of the script
-models_dir = os.path.join(script_dir, 'models')  # Path to models directory
-parkinsons_model_path = os.path.join(models_dir, 'parkinsons_model.sav')
-parkinsons_forest_path = os.path.join(models_dir, 'parkinsons_forest.sav')
-parkinsons_model = load_model(parkinsons_model_path)
-parkinsons_forest = load_model(parkinsons_forest_path)
+parkinsons_model=pickle.load(open('C:/Users/adham/parkinsons_model.sav', 'rb'))
+parkinsons_forest=pickle.load(open('C:/Users/adham/parkinsons_forest.sav', 'rb'))
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(
